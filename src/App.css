@@ -1,0 +1,450 @@
+/* Estilos principales de la aplicación */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 1.5rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.app-header h1 {
+  color: white;
+  margin-bottom: 0.5rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.app-header p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.1rem;
+}
+
+.app-content {
+  display: flex;
+  flex: 1;
+  height: calc(100vh - 120px);
+}
+
+/* Error message */
+.error-message {
+  background: #ff4757;
+  color: white;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 8px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 350px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  overflow-y: auto;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-section h2 {
+  color: #333;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Formulario crear lista */
+.create-list-form {
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.create-list-input {
+  padding: 0.75rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.create-list-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.create-list-button {
+  padding: 0.75rem 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.create-list-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.create-list-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Lista de TodoLists */
+.todo-lists {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.todo-list-item {
+  background: white;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.todo-list-item:hover {
+  border-color: #667eea;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.todo-list-item.selected {
+  border-color: #667eea;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.todo-list-item.selected .todo-list-name {
+  color: white;
+}
+
+.todo-list-item.selected .todo-list-date {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.todo-list-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.todo-list-date {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.selected-indicator {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+/* Contenido principal */
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.welcome-message {
+  text-align: center;
+  color: white;
+  padding: 4rem 2rem;
+}
+
+.welcome-message h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.welcome-message p {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.9;
+}
+
+/* Componente TodoItems */
+.todo-items-container {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.todo-items-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.todo-items-header h2 {
+  color: #333;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.items-stats {
+  display: flex;
+  gap: 1rem;
+}
+
+.stat {
+  background: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.stat.pending {
+  color: #ff6b6b;
+  border: 2px solid #ff6b6b;
+}
+
+.stat.completed {
+  color: #51cf66;
+  border: 2px solid #51cf66;
+}
+
+/* Formulario crear item */
+.create-item-form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+
+.create-item-input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.create-item-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.create-item-button {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.create-item-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(81, 207, 102, 0.4);
+}
+
+/* Secciones de items */
+.items-section {
+  margin-bottom: 2rem;
+}
+
+.section-title {
+  color: #333;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  padding-left: 0.5rem;
+}
+
+.items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Items individuales */
+.todo-item {
+  background: white;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  animation: slideIn 0.3s ease-out;
+}
+
+.todo-item:hover {
+  border-color: #667eea;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.todo-item.completed {
+  background: #f8f9fa;
+  opacity: 0.8;
+}
+
+.todo-item.completed .item-description {
+  text-decoration: line-through;
+  color: #666;
+}
+
+.item-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+.item-checkbox {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.item-checkbox:hover {
+  background: rgba(102, 126, 234, 0.1);
+  transform: scale(1.1);
+}
+
+.item-description {
+  font-size: 1.1rem;
+  color: #333;
+  flex: 1;
+}
+
+.item-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.item-date {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.delete-button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-button:hover {
+  background: rgba(255, 107, 107, 0.1);
+  transform: scale(1.1);
+}
+
+/* Estado vacío */
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: #666;
+}
+
+.empty-state h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.empty-state p {
+  font-size: 1.1rem;
+}
+
+.loading {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  padding: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .app-content {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+  }
+  
+  .todo-items-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .create-item-form {
+    flex-direction: column;
+  }
+  
+  .item-actions {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+  }
+} 
