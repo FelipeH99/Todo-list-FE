@@ -105,6 +105,20 @@ function App() {
     }
   }
 
+  const handleDeleteList = async (listId: number) => {
+    try {
+      await todoListService.delete(listId);
+      if (selectedListId === listId) {
+        setSelectedListId(null);
+      }
+      await loadTodoLists();
+      setError(null);
+    } catch (err) {
+      setError('Error al eliminar la lista');
+      console.error(err);
+    }
+  };
+
   const selectedList = todoLists.find(list => list.id === selectedListId)
 
   return (
@@ -136,6 +150,7 @@ function App() {
                     todoList={list}
                     isSelected={list.id === selectedListId}
                     onSelect={() => handleSelectList(list.id)}
+                    onDelete={() => handleDeleteList(list.id)}
                   />
                 ))}
               </div>

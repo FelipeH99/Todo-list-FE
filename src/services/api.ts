@@ -1,8 +1,14 @@
 import axios from 'axios';
-import { TodoList, TodoItem, CreateTodoListDto, CreateTodoItemDto, UpdateTodoItemDto } from '../types';
+import {
+  TodoList,
+  TodoItem,
+  CreateTodoListDto,
+  CreateTodoItemDto,
+  UpdateTodoItemDto,
+} from '../types';
 
 // Configuración base de Axios
-const API_BASE_URL = 'http://localhost:9000/api';
+const API_BASE_URL = '/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -40,7 +46,7 @@ export const todoListService = {
   // Eliminar una lista
   async delete(id: number): Promise<void> {
     await api.delete(`/todolists/${id}`);
-  }
+  },
 };
 
 // Servicio para TodoItems
@@ -59,7 +65,10 @@ export const todoItemService = {
 
   // Crear un nuevo item
   async create(createDto: CreateTodoItemDto): Promise<TodoItem> {
-    const response = await api.post<TodoItem>('/items', createDto);
+    const response = await api.post<TodoItem>(
+      `/todolists/${createDto.listId}/items`,
+      createDto
+    );
     return response.data;
   },
 
@@ -78,7 +87,7 @@ export const todoItemService = {
   // Eliminar un item
   async delete(id: number): Promise<void> {
     await api.delete(`/items/${id}`);
-  }
+  },
 };
 
 // Interceptor para manejar errores globalmente
@@ -86,17 +95,19 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     console.error('Error en la API:', error);
-    
+
     if (error.response?.status === 404) {
       throw new Error('Recurso no encontrado');
     } else if (error.response?.status === 500) {
       throw new Error('Error interno del servidor');
     } else if (error.code === 'ECONNREFUSED') {
-      throw new Error('No se puede conectar con el servidor. Asegúrate de que la API está ejecutándose en http://localhost:9000');
+      throw new Error(
+        'No se puede conectar con el servidor. Asegúrate de que la API está ejecutándose en http://localhost:9000'
+      );
     }
-    
+
     throw error;
   }
 );
 
-export default api; 
+export default api;
